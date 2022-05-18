@@ -169,6 +169,8 @@ end
 #  remember_created_at    :datetime
 #  created_at             :datetime
 #  updated_at             :datetime
+#  github_account         :string
+#  twitter_account        :string
 #
 # Indexes
 #
