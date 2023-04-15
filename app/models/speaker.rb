@@ -1,8 +1,8 @@
 class Speaker < ApplicationRecord
   belongs_to :user
   belongs_to :event
-  belongs_to :proposal
-  belongs_to :program_session
+  belongs_to :proposal, optional: true
+  belongs_to :program_session, optional: true
 
   has_many :proposals, through: :user
   has_many :program_sessions
@@ -16,7 +16,8 @@ class Speaker < ApplicationRecord
 
   attr_accessor :skip_name_email_validation
 
-  scope :in_program, -> { where("program_session_id IS NOT NULL") }
+  scope :in_program, -> { where.not(program_session_id: nil) }
+  scope :a_to_z, -> { order(:speaker_name) }
 
   def name
     speaker_name.present? ? speaker_name : user.try(:name)
@@ -29,7 +30,6 @@ class Speaker < ApplicationRecord
   def gravatar_hash
     User.gravatar_hash(email)
   end
-
 end
 
 # == Schema Information

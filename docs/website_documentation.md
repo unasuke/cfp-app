@@ -29,8 +29,11 @@ show up in static page content that is generated from [Page Templates](#page-tem
 Logo, background and favicon images can be uploaded and will be stored in s3 and
 resized as needed using Rails' builtin
 [ActiveStorage](https://edgeguides.rubyonrails.org/active_storage_overview.html)).
-The background image can be used by setting a url for a `background-image` style
-in appropriate html tags in static page content. Other general content fields
+The logo and background images are used in the header and footer and some page
+templates but can also be applied dynamically in any page using the [logo and
+background custom tags](#logo-and-background).
+
+Other general content fields
 include:
 
 - City: the city for the event (can include the state if desired).
@@ -66,41 +69,9 @@ event. Note that the first line will automatically be styled as a bold title
 for the content.
 - Footer copyright: appears at the very bottom of the footer
 - Twitter handle: just the handle for the event without the '@' sign. Note that
-  this will also populate the `tiwtter:site` meta tag in the head.
+  this will also populate the `twitter:site` meta tag in the head.
 - Facebook url: full url to the facebook page for the event.
 - Instagram url: full url to the instagram page for the event.
-- Domains: a special field that deserves its own treatment [as follows](#domain-configuration).
-
-### Domain Configuration
-
-Once created, an event website can always be accessed from your cfp-app domain with
-the event slug in the path. For example, rubyconf 2022 hosted by Ruby Central
-could be accessed at `https://cfp.rubycentral.org/rubyconf-2022`.
-
-However, most conferences will prefer to have a custom domain which can be
-achieved by following the steps below. Note that these instructions are for websites
-hosted on Heroku but something similar can likely be achieved with whatever
-hosted solution being used.
-
-1) Add your custom domain to the Website on the configuration page. Note that
-multiple domains can be added by separating them with commas in the input.
-Currently only domain matching is supported so do not include any subdomain like
-'www' (i.e. just `rubyconf.org`).
-2) Add your domain to your heroku hosted cfp-app. This can be done using the
-heroku-cli following [these
-instructions](https://devcenter.heroku.com/articles/custom-domains) or from the
-`Settings` section in the dashboard. Note that you will likely need to configure
-SSL certificates as well.
-3) You will also need to [Configure your
-DNS](https://devcenter.heroku.com/articles/custom-domains#configuring-dns-for-root-domains)
-to point to the heroku DNS target for your app.
-
-There is a section in the [routes file](/config/routes.rb/) wrapped with a
-`DomainConstraint` that allows the most recent active website to be accessed at
-the root of your domain. So, with the example from above, Rubconf 2022 can be
-found at `https://rubyconf.org`. Older conferences that share the same domain
-can also still be accessed by simply appending the event slug. Hence, Rubyconf
-2021 could be reached at `https://rubyconf.org/rubyconf-2021`.
 
 ### Configure Website Session Formats
 
@@ -214,6 +185,93 @@ website including title, description, open graph and twitter tags. Fields includ
 - image: a file field for uploading an image that will populate the url for
   `og:image` and `twitter:image`
 
+### Domains and Caching
+
+#### Domain Configuration
+
+Once created, an event website can always be accessed from your cfp-app domain with
+the event slug in the path. For example, rubyconf 2022 hosted by Ruby Central
+could be accessed at `https://cfp.rubycentral.org/rubyconf-2022`.
+
+However, most conferences will prefer to have a custom domain which can be
+achieved by following the steps below. Note that these instructions are for websites
+hosted on Heroku but something similar can likely be achieved with whatever
+hosted solution being used.
+
+1) Add your custom domain to the Website on the configuration page. Note that
+multiple domains can be added by separating them with commas in the input.
+Currently only domain matching is supported so do not include any subdomain like
+'www' (i.e. just `rubyconf.org`).
+2) Add your domain to your heroku hosted cfp-app. This can be done using the
+heroku-cli following [these
+instructions](https://devcenter.heroku.com/articles/custom-domains) or from the
+`Settings` section in the dashboard. Note that you will likely need to configure
+SSL certificates as well.
+3) You will also need to [Configure your
+DNS](https://devcenter.heroku.com/articles/custom-domains#configuring-dns-for-root-domains)
+to point to the heroku DNS target for your app.
+
+There is a section in the [routes file](/config/routes.rb/) wrapped with a
+`DomainConstraint` that allows the most recent active website to be accessed at
+the root of your domain. So, with the example from above, Rubconf 2022 can be
+found at `https://rubyconf.org`. Older conferences that share the same domain
+can also still be accessed by simply appending the event slug. Hence, Rubyconf
+2021 could be reached at `https://rubyconf.org/rubyconf-2021`.
+
+#### Caching
+
+At a certain point in the lifecycle of your website it may be desirable to add
+some caching for the static and dynamic pages for your conference especially
+right before and during your event.
+
+Currently caching is somewhat hardcoded to only support
+[Fastly](https://www.fastly.com/) as a caching CDN proxy. If you would like to
+use a different service please contact the CFP app team and we will help you
+develop an adapter for a different provider.
+
+To use Fastly you will need to add ENV variables for `FASTLY_API_KEY` and
+`FASTLY_SERVICE_ID`. This will enable the FastlyService to be instantiated on
+server boot.
+
+By default the caching setting is set to `off`. When you are ready to enable
+caching you can change the setting to `automatic` or `manual`. `automatic`
+caching will automatically purge all of your website content anytime you save
+the website configuration or a page or sponsor. However, it will not purge when
+program sessions or time slots change. In that case you will need to resort to
+using the `Purge` button at the top of the Website configuration page. With the
+setting set to `manual` you will always need to use the `Purge` button to clear
+the public Fastly cached content for your website. This setting can therefore be
+used to somewhat set the page and program content for your website and only
+update when you ready for a set of changes to become visible. If you ever want
+to turn caching back to `off` be sure to also `Purge` your cache so that new
+requests will miss the Fastly cache and hit the server instead.
+
+Caching is controlled with various response headers that browsers and especially
+Fastly recognize. We recommend keeping browser caching turned off or very low.
+You are able to influence this with the `CACHE_CONTROL_MAX_AGE` ENV variable which
+populates the max-age setting in the `Cache-Control` response header and
+defaults to 0 but can be set to however many seconds you wish the browser to
+cache the page.
+
+Fastly will instead read from the `CACHE_CONTROL_S_MAXAGE` ENV variable which
+defaults to 604800 (1 week) and populates the s-maxage setting in the
+`Cache-Control` response header. Note that when caching is turned off the
+`Cache-Control` is set to private and otherwise is set to public.
+
+It is also worth noting that a custom Fastly
+[`Surrogate-Key`](https://developer.fastly.com/reference/http/http-headers/Surrogate-Key/)
+response header is added using the event slug as its value. The app will
+[`purge_by_key`](https://github.com/fastly/fastly-ruby#efficient-purging) using
+the event slug so that purging will be scoped to the current website in case you
+are using the same fastly service for multiple websites/events.
+
+Finally, `Etag` and `Last-Modified` response headers are added when caching is
+turned on based on the `website#purged_at` timestamp using the convenient Rails
+[`fresh_when`](https://api.rubyonrails.org/classes/ActionController/ConditionalGet.html#method-i-fresh_when)
+helper. This adds another level of cache validation for Fastly and/or browser
+by returning a 304 Not Modified response if an If-Modified-Since
+header comes through a request and is greater than the purged_at datetime.
+
 ## Page Content Management
 
 You can add static pages to your website by navigating to the `Pages` section in
@@ -261,14 +319,27 @@ the link below the editor block. Note that this editor has its own opionionated
 way of adding and editing the html and it is likely that someone more familiar
 with html will need to refine the content that has been added.
 
-### Custom Sponsor Tags
+### Custom Tags
 
+#### Sponsors
 Sponsor information can be embedded into any static page by adding some custom
 sponsor tags. Adding a `<sponsors-banner-ads></sponsors-banner-ads>` will add a
 rotating banner of the uploaded sponsors ads. Adding
 `<sponsors-footer></sponsors-footer>` will provide a complete list of the
 sponsors with their logos and description grouped by tiers typically added to
 the bottom of a page.
+
+#### Logo and Background
+You can also embed the current logo image into the page by adding the
+`<logo-image width="150"></logo-image>` tag into the page with whatever width
+you want for the logo in pixels.
+
+If you want to add the website background image as a background image style then
+add the `background-image-style-url` as an attribute to your tag like `<div
+background-image-style-url></div>`. If you need to further customize that tag
+you will not be able to add inline styles so we recommend using tailwind
+classes. For example to make the background image repeating this should work:
+`<div class="bg-repeat" background-image-style-url></div>`.
 
 ### Saving
 
@@ -305,8 +376,6 @@ One page at a time can be promoted to be the landing page accessed by the root
 url for the website. Clicking on the `Promote` button on the Pages index page
 will promote the selected page. You can see which page is currently promoted in
 the `Landing Page` column of the Page index page.
-
-### Hiding the Header or Footer
 
 ### Other Buttons
 

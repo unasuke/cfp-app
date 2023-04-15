@@ -6,10 +6,18 @@ source 'https://rubygems.org'
 ruby File.read(".ruby-version").strip
 
 gem 'puma'
-gem 'rails', '~> 6.1.4'
+gem 'rails', '~> 6.1.6'
 gem 'mimemagic', github: 'mimemagicrb/mimemagic', ref: '01f92d86d15d85cfd0f20dabd025dcbd36a8a60f'
 gem 'mime-types-data'
 gem 'mime-types'
+gem 'rexml'
+gem 'matrix'
+gem 'honeybadger', '~> 4.0'
+
+# Required until Rails 7 - https://github.com/mikel/mail/pull/1472#issuecomment-1165161541
+gem 'net-smtp', require: false
+gem 'net-imap', require: false
+gem 'net-pop', require: false
 
 gem 'pg'
 
@@ -25,20 +33,21 @@ gem 'selectize-rails'
 gem 'uglifier', '>= 1.3.0'
 gem 'underscore-rails'
 
-gem 'devise', '~> 4.7'
+gem 'devise', '~> 4.8'
 gem 'omniauth-github'
 gem 'omniauth-twitter'
 gem "omniauth-rails_csrf_protection", "~> 1.0"
 
 gem 'actionview-encoded_mail_to'
 gem 'active_model_serializers', '~> 0.10.0'
-gem 'bootsnap', require: false
+gem 'bootsnap', '~> 1.13', require: false
 gem 'bootstrap-multiselect-rails', '~> 0.9.9'
 gem 'chartkick'
 gem 'coderay', '~> 1.0'
-gem 'country_select', '~> 1.3'
+gem 'country_select', '~> 8.0'
 gem 'draper', '~> 4.0'
 gem 'faker'
+gem 'fastly'
 gem 'groupdate'
 gem 'nokogiri'
 gem 'pundit'
@@ -58,7 +67,7 @@ gem 'sendgrid-ruby'
 
 group :production do
   gem 'aws-sdk-s3'
-  gem 'rack-timeout', '~> 0.5'
+  gem 'rack-timeout', '~> 0.6'
 end
 
 group :development do
@@ -75,8 +84,9 @@ group :development do
 end
 
 group :development, :test do
-  gem 'capybara', '~> 3.33'
-  gem 'database_cleaner', '~> 1.6'
+  gem 'amazing_print', require: false
+  gem 'capybara', '~> 3.37'
+  gem 'database_cleaner', '~> 2.0'
   gem 'dotenv-rails'
   gem 'factory_bot_rails'
   gem 'growl'
@@ -92,5 +102,5 @@ group :development, :test do
   gem 'selenium-webdriver'
   gem 'spring'
   gem 'timecop'
-  gem 'webdrivers', '~> 4.0'
+  gem 'webdrivers', '~> 4.7'
 end

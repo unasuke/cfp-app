@@ -4,7 +4,7 @@ class Invitation < ApplicationRecord
   include Invitable
 
   belongs_to :proposal
-  belongs_to :user
+  belongs_to :user, optional: true
 
   def accept(user)
     transaction do

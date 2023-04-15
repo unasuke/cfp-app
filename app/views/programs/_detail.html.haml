@@ -1,4 +1,4 @@
-.program-session-detail{ id: "program-session-detail-#{program_session.id}",  data: { 'fly-out-target': 'programSession' } }
+.program-session-detail.hidden{ id: dom_id(program_session),  data: { 'fly-out-target': 'listItem' } }
   .program-session-title
     = program_session.title
 
@@ -14,6 +14,12 @@
   .program-session-about
     %span About
     = program_session.abstract.html_safe
+    - if program_session.video_url.present?
+      %a{ :href => "#{program_session.video_url}", :title => "Session Video", :target => "_blank" }
+        Video
+    - if program_session.slides_url.present?
+      %a{ :href => "#{program_session.slides_url}", :title => "Session Slides", :target => "_blank" }
+        Slides
 
   .program-session-authors
     - program_session.speakers.each do |s|

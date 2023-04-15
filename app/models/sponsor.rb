@@ -1,13 +1,16 @@
 class Sponsor < ApplicationRecord
   belongs_to :event
+  has_one :website, through: :event, touch: :purged_at
+
+  has_many :time_slots
 
   has_one_attached :primary_logo
   has_one_attached :footer_logo
   has_one_attached :banner_ad
 
-  validates :primary_logo, presence: true
+  validates_presence_of :primary_logo, :name, :tier, :url, :description
 
-  TIERS = ['platinum', 'gold', 'silver', 'bronze', 'other', 'supporter']
+  TIERS = ['diamond', 'platinum', 'gold', 'silver', 'bronze', 'other', 'supporter']
 
   scope :published, -> { where(published: true) }
   scope :with_footer_image, -> { joins(:footer_logo_attachment) }
@@ -22,7 +25,9 @@ class Sponsor < ApplicationRecord
   }
 
   def has_offer?
-    offer_headline && offer_text && offer_url
+    (offer_headline.present? &&
+     offer_text.present? &&
+     offer_url.present? )
   end
 end
 

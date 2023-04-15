@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2022_05_08_071747) do
+ActiveRecord::Schema.define(version: 2023_02_03_031006) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -115,6 +115,7 @@ ActiveRecord::Schema.define(version: 2022_05_08_071747) do
     t.boolean "hide_footer", default: false, null: false
     t.boolean "hide_page", default: false, null: false
     t.string "footer_category"
+    t.datetime "body_published_at"
     t.index ["website_id"], name: "index_pages_on_website_id"
   end
 
@@ -227,7 +228,6 @@ ActiveRecord::Schema.define(version: 2022_05_08_071747) do
     t.string "tier"
     t.boolean "published"
     t.string "url"
-    t.string "other_title"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.text "description"
@@ -277,10 +277,12 @@ ActiveRecord::Schema.define(version: 2022_05_08_071747) do
     t.datetime "created_at"
     t.datetime "updated_at"
     t.bigint "track_id"
+    t.bigint "sponsor_id"
     t.index ["conference_day"], name: "index_time_slots_on_conference_day"
     t.index ["event_id"], name: "index_time_slots_on_event_id"
     t.index ["program_session_id"], name: "index_time_slots_on_program_session_id"
     t.index ["room_id"], name: "index_time_slots_on_room_id"
+    t.index ["sponsor_id"], name: "index_time_slots_on_sponsor_id"
     t.index ["track_id"], name: "index_time_slots_on_track_id"
   end
 
@@ -382,6 +384,8 @@ ActiveRecord::Schema.define(version: 2022_05_08_071747) do
     t.string "facebook_url"
     t.string "instagram_url"
     t.string "navigation_links", default: [], array: true
+    t.string "caching", default: "off", null: false
+    t.datetime "purged_at"
     t.index ["event_id"], name: "index_websites_on_event_id"
   end
 

@@ -1,5 +1,5 @@
 class ApplicationController < ActionController::Base
-  include Pundit
+  include Pundit::Authorization
   include ActivateNavigation
   rescue_from Pundit::NotAuthorizedError, with: :user_not_authorized
 
@@ -197,4 +197,21 @@ class ApplicationController < ActionController::Base
     @program_tracks ||= current_event && current_event.tracks.any? ? current_event.tracks : []
   end
 
+  def set_cache_headers
+    return unless Rails.configuration.action_controller.perform_caching
+
+    server_cache_age =
+      current_website.caching_off? ? 0 : ENV.fetch('CACHE_CONTROL_S_MAXAGE', 1.week)
+
+    expires_in(
+      ENV.fetch('CACHE_CONTROL_MAX_AGE', 0).to_i,
+      public: !current_website.caching_off?,
+      's-maxage': server_cache_age.to_i
+    )
+    response.headers['Surrogate-Key'] = current_website.event.slug if FastlyService.service
+    fresh_when(
+      current_website,
+      last_modified: current_website.purged_at || current_website.updated_at
+    ) unless current_website.caching_off?
+  end
 end

@@ -14,8 +14,12 @@
           %th Name
           %th Slug
           %th Published
+          %th Last Published
+          %th Unpublished Changes
           %th Landing Page
-          %th Actions
+          %th
+            Actions
+            = link_to_docs("previewing")
       %tbody
         = render @pages
 %hr
