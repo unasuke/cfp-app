@@ -64,6 +64,7 @@ feature "Teammate Invitation received" do
         end
 
         it "can use a twitter oauth account" do
+          skip # https://github.com/kaigionrails/cfp-app/pull/5
           click_link "Sign up"
           click_link "Sign in with Twitter"
           expect(page).to have_content("Congrats! You are now an official team member of My Event!")
