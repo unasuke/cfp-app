@@ -18,6 +18,10 @@ $dark-blue: #063E5E;
 $bright-blue: #1A95DD;
 $green: #189138;
 
+$kaigionrails_2024_primary: #fe4053;
+$kaigionrails_2024_bg: #d7d2d0;
+$kaigionrails_2024_black: #000505;
+
 $gray-base:              $black !default;
 $gray-darker:            lighten($gray-base, 13.5%) !default; // #222
 $gray-dark:              lighten($gray-base, 20%) !default;   // #333
@@ -26,7 +30,7 @@ $gray-light:             #b2afaa !default; //lighten($gray-base, 46.7%) !default
 $gray-lighter:           lighten($gray-base, 93.5%) !default; // #eee
 $beige:                  #f9f6f1;
 
-$brand-primary:         $ruby-central-red !default; //darken(#428bca, 6.5%) !default; // #337ab7
+$brand-primary:         $kaigionrails_2024_primary !default; //darken(#428bca, 6.5%) !default; // #337ab7
 $brand-success:         $green !default;
 $brand-info:            $bright-blue !default;
 $brand-info-alt:        $dark-blue !default;
@@ -391,14 +395,14 @@ $navbar-padding-vertical:          (($navbar-height - $line-height-computed) / 2
 $navbar-collapse-max-height:       340px !default;
 
 $navbar-default-color:             $white !default;
-$navbar-default-bg:                $brand-primary !default;
+$navbar-default-bg:                $kaigionrails_2024_bg !default;
 $navbar-default-border:            darken($navbar-default-bg, 6.5%) !default;
 
 // Navbar links
-$navbar-default-link-color:                $white !default;
-$navbar-default-link-hover-color:          darken($white, 20%) !default;
+$navbar-default-link-color:                $kaigionrails_2024_black !default;
+$navbar-default-link-hover-color:          darken($kaigionrails_2024_black, 20%) !default;
 $navbar-default-link-hover-bg:             transparent !default;
-$navbar-default-link-active-color:         lighten($white, 50%) !default;
+$navbar-default-link-active-color:         $kaigionrails_2024_black !default;
 $navbar-default-link-active-bg:            lighten($navbar-default-bg, 6.5%) !default;
 $navbar-default-link-disabled-color:       #ccc !default;
 $navbar-default-link-disabled-bg:          transparent !default;
