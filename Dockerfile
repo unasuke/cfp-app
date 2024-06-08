@@ -18,7 +18,6 @@ RUN bin/rails assets:precompile
 FROM public.ecr.aws/docker/library/ruby:3.1.2-slim-buster
 WORKDIR /app
 COPY --from=builder /app/vendor/bundle /app/vendor/bundle
-COPY --from=builder /app/.bundle /app/.bundle
 COPY --from=builder /app/public/packs /app/public/packs
 COPY . /app/
 
