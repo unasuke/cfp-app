@@ -13,7 +13,7 @@ COPY package.json yarn.lock /app/
 RUN npm install -g yarn \
     && yarn install --frozen-lockfile
 COPY . /app/
-RUN bin/rails assets:precompile
+RUN RAILS_ENV=production SECRET_KEY_BASE=sample bin/rails assets:precompile
 
 FROM public.ecr.aws/docker/library/ruby:3.1.2-slim-buster
 WORKDIR /app
