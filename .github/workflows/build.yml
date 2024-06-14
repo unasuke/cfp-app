@@ -1,8 +1,5 @@
 name: docker build
 on:
-  push:
-    branches:
-      - "kaigionrails"
   pull_request:
     branches:
       - "*"
