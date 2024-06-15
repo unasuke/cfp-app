@@ -1,4 +1,4 @@
-FROM public.ecr.aws/docker/library/ruby:3.1.2-slim-buster as builder
+FROM public.ecr.aws/docker/library/ruby:3.1.2-slim-bullseye as builder
 WORKDIR /app
 
 RUN apt-get update \
