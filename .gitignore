@@ -89,7 +89,13 @@ yarn-debug.log*
 /spec/examples.txt
 /test/tmp/
 /test/version_tmp/
-/tmp/
+/tmp/*
+!/tmp/
+!/tmp/.keep
+/tmp/pids/*
+!/tmp/pids/
+!/tmp/pids/.keep
+
 
 # Used by dotenv library to load environment variables.
 # .env
@@ -247,3 +253,6 @@ fabric.properties
 .idea/**/azureSettings.xml
 
 # End of https://www.toptal.com/developers/gitignore/api/rubymine
+
+# auto generate file
+deploy/apprunner.json
