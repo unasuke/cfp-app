@@ -15,11 +15,5 @@ RUN npm install -g yarn \
 COPY . /app/
 RUN RAILS_ENV=production SECRET_KEY_BASE=sample bin/rails assets:precompile
 
-FROM public.ecr.aws/docker/library/ruby:3.1.2-slim-buster
-WORKDIR /app
-COPY --from=builder /app/vendor/bundle /app/vendor/bundle
-COPY --from=builder /app/public/packs /app/public/packs
-COPY . /app/
-
 ENV PORT 3000
 CMD ["bundle", "exec", "puma", "-C", "config/puma.rb"]
