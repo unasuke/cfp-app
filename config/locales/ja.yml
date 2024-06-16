@@ -2,6 +2,7 @@ ja:
   hello: こんにちは
   proposal:
     new:
+      change_locale: "Switch to en locale"
       title: "プロポーザルを提出する"
       closes: 締め切り
       form: フォーム
