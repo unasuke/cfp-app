@@ -4,6 +4,7 @@ class ProposalsController < ApplicationController
   before_action :require_proposal, except: [ :index, :create, :new, :parse_edit_field ]
   before_action :require_invite_or_speaker, only: [:show]
   before_action :require_speaker, except: [ :index, :create, :new, :parse_edit_field ]
+  around_action :set_locale
 
   decorates_assigned :proposal
 
@@ -37,6 +38,8 @@ class ProposalsController < ApplicationController
   end
 
   def new
+    @switch_locale_path = new_event_proposal_path(@event, locale: (I18n.locale == :ja ? :en : :ja))
+
     if @event.closed?
       redirect_to event_path (@event)
       flash[:danger] = "The CFP is closed for proposal submissions."
@@ -191,5 +194,12 @@ class ProposalsController < ApplicationController
       msg << ". Visit #{view_context.link_to('My Profile', edit_profile_path)} to update."
       msg.html_safe
     end
+  end
+
+  def set_locale(&action)
+    locale = params[:locale] || session[:locale]
+    locale = I18n.default_locale unless I18n.available_locales.include?(locale&.to_sym)
+    session[:locale] = locale
+    I18n.with_locale(locale, &action)
   end
 end

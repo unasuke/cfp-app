@@ -1,5 +1,5 @@
 .event-info-bar
-  .row
+  .row.margin-bottom
     .col-md-8
       .event-info.event-info-dense
         %strong.event-title= event.name
@@ -16,6 +16,10 @@
           %span.event-meta
             = t("proposal.new.closes")
             %strong= l(event.closes_at, format: :short)
+  .row
+    .col-md-4.col-md-push-8.text-right.test-right-responsive
+      %a{class: "btn btn-default", href: @switch_locale_path}
+        = t("proposal.new.change_locale")
 
 .page-header.page-header-slim
   .row
