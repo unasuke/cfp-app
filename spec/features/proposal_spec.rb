@@ -38,6 +38,39 @@ feature "Proposals" do
         expect(page).to have_text("The CFP is closed for proposal submissions.")
       end
     end
+
+    context "with locale param" do
+      context "when locale is 'en'" do
+        it "shows the page in en locale" do
+          visit new_event_proposal_path(event_slug: event.slug, locale: 'en')
+          expect(page).to have_text("Submit a Proposal")
+        end
+      end
+
+      context "when locale is 'ja'" do
+        it "shows the page in ja locale" do
+          visit new_event_proposal_path(event_slug: event.slug, locale: 'ja')
+          expect(page).to have_text("プロポーザルを提出する")
+        end
+      end
+
+      context "when unknown locale" do
+        it "shows the page in en locale (as fallback)" do
+          #FIXME: for test, fallback to en locale, but production fallback to ja locale
+          visit new_event_proposal_path(event_slug: event.slug, locale: 'xx')
+          expect(page).to have_text("Submit a Proposal")
+        end
+      end
+    end
+
+    context "when click locale switch button" do
+      it "switches the locale" do
+        go_to_new_proposal
+        expect(page).to have_text("日本語に切り替える")
+        click_on '日本語に切り替える'
+        expect(page).to have_text("Switch to en locale")
+      end
+    end
   end
 
   context "when submitting", js: true do

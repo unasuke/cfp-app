@@ -33,6 +33,7 @@ en:
   hello: "Hello world"
   proposal:
     new:
+      change_locale: "日本語に切り替える"
       title: "Submit a Proposal"
       closes: "CFP closes:"
       form: "Proposal Form"
