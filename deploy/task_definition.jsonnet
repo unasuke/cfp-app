@@ -44,6 +44,10 @@
           value: 'enabled',
         },
         {
+          name: 'SENTRY_ENV',
+          value: 'production',
+        }
+        {
           name: 'TIMEZONE',
           value: 'Asia/Tokyo',
         },
@@ -72,6 +76,10 @@
         {
           name: 'SECRET_KEY_BASE',
           valueFrom: $.parameterStoreArn('SECRET_KEY_BASE'),
+        },
+        {
+          name: 'SENTRY_DSN',
+          valueFrom: $.parameterStoreArn('SENTRY_DSN'),
         },
         {
           name: 'SLACK_WEBHOOK_URL',
