@@ -197,8 +197,9 @@ class ProposalsController < ApplicationController
   end
 
   def set_locale(&action)
-    locale = params[:locale] || session[:locale] || I18n.default_locale
-    session[:locale] = locale if locale
+    locale = params[:locale] || session[:locale]
+    locale = I18n.default_locale unless I18n.available_locales.include?(locale&.to_sym)
+    session[:locale] = locale
     I18n.with_locale(locale, &action)
   end
 end

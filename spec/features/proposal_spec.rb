@@ -53,6 +53,14 @@ feature "Proposals" do
           expect(page).to have_text("プロポーザルを提出する")
         end
       end
+
+      context "when unknown locale" do
+        it "shows the page in en locale (as fallback)" do
+          #FIXME: for test, fallback to en locale, but production fallback to ja locale
+          visit new_event_proposal_path(event_slug: event.slug, locale: 'xx')
+          expect(page).to have_text("Submit a Proposal")
+        end
+      end
     end
 
     context "when click locale switch button" do
