@@ -32,6 +32,14 @@
           value: 'en_US.UTF-8',
         },
         {
+          name: 'MAIL_FROM',
+          value: 'noreply@kaigionrails.org',
+        },
+        {
+          name: 'MAIL_HOST',
+          value: 'cfp.kaigionrails.org',
+        },
+        {
           name: 'RACK_ENV',
           value: 'production',
         },
