@@ -23,6 +23,8 @@ jobs:
       RAILS_ENV: test
       DATABASE_URL: postgres://postgres:postgres@localhost:5432/cfp_app_test
     steps:
+      - run: sudo apt-get update && sudo apt-get install --no-install-recommends -y google-chrome-stable curl libvips postgresql-client libpq-dev imagemagick
+
       - uses: actions/checkout@v4
       - uses: ruby/setup-ruby@v1
         with:
@@ -34,3 +36,18 @@ jobs:
       - run: yarn install --frozen-lockfile
       - run: bundle exec rails db:setup
       - run: bundle exec rspec
+          cache: 'yarn'
+
+      - name: Run tests
+        env:
+          RAILS_ENV: test
+          DATABASE_URL: postgres://postgres@localhost:5432/cfp_app_test
+        run: bundle e rails db:setup assets:precompile spec
+
+      - name: Keep screenshots from failed system tests
+        uses: actions/upload-artifact@v4
+        if: failure()
+        with:
+          name: screenshots
+          path: ${{ github.workspace }}/tmp/capybara
+          if-no-files-found: ignore
