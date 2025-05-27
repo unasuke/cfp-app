@@ -34,9 +34,6 @@ jobs:
           node-version-file: ".node-version"
           cache: "yarn"
       - run: yarn install --frozen-lockfile
-      - run: bundle exec rails db:setup
-      - run: bundle exec rspec
-          cache: 'yarn'
 
       - name: Run tests
         env:
