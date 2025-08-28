@@ -57,7 +57,6 @@ class Staff::ProposalMailer < ApplicationMailer
       mail_markdown(
         from: event.contact_email,
         to: to,
-        bcc: test_mode ? '' : event.contact_email,
         subject: subject
       )
     end
