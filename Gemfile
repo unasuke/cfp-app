@@ -11,7 +11,6 @@ gem 'mime-types-data'
 gem 'mime-types'
 gem 'rexml'
 gem 'matrix'
-gem 'honeybadger', '~> 6.1'
 
 gem 'csv'
 
