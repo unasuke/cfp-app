@@ -14,8 +14,8 @@ end
 #
 # Table name: session_formats
 #
-#  id          :integer          not null, primary key
-#  event_id    :integer
+#  id          :bigint(8)        not null, primary key
+#  event_id    :bigint(8)
 #  name        :string
 #  description :string
 #  duration    :integer

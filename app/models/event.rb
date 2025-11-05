@@ -239,7 +239,7 @@ end
 #
 # Table name: events
 #
-#  id                          :integer          not null, primary key
+#  id                          :bigint(8)        not null, primary key
 #  name                        :string
 #  slug                        :string
 #  url                         :string
@@ -256,7 +256,7 @@ end
 #  proposal_tags               :text
 #  review_tags                 :text
 #  custom_fields               :text
-#  speaker_notification_emails :text             default({:accept=>"", :reject=>"", :waitlist=>""})
+#  speaker_notification_emails :text
 #  created_at                  :datetime
 #  updated_at                  :datetime
 #

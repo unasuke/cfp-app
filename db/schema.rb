@@ -114,7 +114,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_111232) do
     t.boolean "hide_footer", default: false, null: false
     t.boolean "hide_page", default: false, null: false
     t.boolean "hide_navigation", default: false, null: false
-    t.string "footer_category"
     t.index ["website_id"], name: "index_pages_on_website_id"
   end
 
@@ -336,11 +335,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_111232) do
     t.string "prospectus_link"
     t.string "twitter_handle"
     t.string "directions"
-    t.string "footer_categories", array: true
-    t.text "footer_about_content"
-    t.string "footer_copyright"
-    t.string "facebook_url"
-    t.string "instagram_url"
     t.index ["event_id"], name: "index_websites_on_event_id"
   end
 
