@@ -91,8 +91,6 @@ class Staff::PagesController < Staff::ApplicationController
         :template,
         :name,
         :slug,
-        :hide_navigation,
-        :hide_page,
         :hide_header,
         :hide_footer,
         :unpublished_body
