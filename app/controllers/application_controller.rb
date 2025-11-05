@@ -54,32 +54,13 @@ class ApplicationController < ActionController::Base
 
   def current_website
     @current_website ||= begin
-      if current_event
-        current_event.website
-      elsif params[:slug]
-        Website.joins(:event).find_by(events: { slug: params[:slug] })
-      else
-        older_domain_website || latest_domain_website
-      end
+      event = current_event || Event.find_by(slug: params[:slug])
+      event.website
     end
   end
 
-  def older_domain_website
-    @older_domain_website ||=
-      domain_websites.find_by(events: { slug: params[:domain_page_or_slug] })
-  end
-
-  def latest_domain_website
-    @latest_domain_website ||= domain_websites.first
-  end
-
-  def domain_websites
-    Website.domain_match(request.domain).joins(:event).order(created_at: :desc)
-  end
-
-  def set_current_event(event_or_event_id)
-    event_or_event_id = Event.find_by(id: event_or_event_id) unless Event === event_or_event_id
-    @current_event = event_or_event_id.try(:decorate)
+  def set_current_event(event_id)
+    @current_event = Event.find_by(id: event_id).try(:decorate)
     session[:current_event_id] = @current_event.try(:id)
     @current_event
   end

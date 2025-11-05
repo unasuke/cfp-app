@@ -30,8 +30,4 @@ class PagePolicy < ApplicationPolicy
   def publish?
     new?
   end
-
-  def promote?
-    new?
-  end
 end

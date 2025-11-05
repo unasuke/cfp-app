@@ -53,7 +53,7 @@ feature "Website Page Management", type: :system do
     login_as(organizer)
 
     visit page_path(slug: event.slug, page: home_page.slug)
-    expect(page).to have_content("Page Not Found")
+    expect(current_path).to eq('/404')
     visit event_staff_pages_path(event)
     accept_confirm { click_on('Publish') }
 
@@ -69,18 +69,5 @@ feature "Website Page Management", type: :system do
     visit page_path(slug: event.slug, page: home_page.slug)
     expect(page).to have_content('Home Content')
     within('#main-nav') { expect(page).to have_content(home_page.name) }
-  end
-
-  scenario "Organizer changes a website landing page", :js do
-    skip "FactoryBot 😤"
-    create(:page, name: 'Announcement', slug: 'announcement', landing: true)
-    home_page = create(:page, name: 'Home', slug: 'home')
-    login_as(organizer)
-
-    visit event_staff_pages_path(event)
-    accept_confirm { click_on('Promote') }
-
-    expect(page).to have_content('Home Page was successfully promoted.')
-    expect(home_page.reload).to be_landing
   end
 end

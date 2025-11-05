@@ -75,5 +75,4 @@ Rails.application.configure do
 
   config.time_zone = ENV.fetch('TIMEZONE') { 'Pacific Time (US & Canada)' }
   config.action_cable.url = 'ws://localhost:3000/cable'
-  config.hosts.clear
 end

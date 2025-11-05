@@ -1,10 +1,5 @@
 Rails.application.routes.draw do
   unless ENV['DISABLE_WEBSITE']
-    constraints DomainConstraint.new do
-      get '/', to: 'pages#show'
-      get '/:domain_page_or_slug', to: 'pages#show'
-      get '/:slug/:page', to: 'pages#show'
-    end
   end
 
   root 'home#show'
@@ -117,7 +112,6 @@ Rails.application.routes.draw do
         member do
           get :preview
           patch :publish
-          patch :promote
         end
       end
     end
@@ -150,10 +144,9 @@ Rails.application.routes.draw do
   end
 
   get '/current-styleguide', :to => 'pages#current_styleguide'
-  get '/404', :to => 'errors#not_found', as: :not_found
+  get '/404', :to => 'errors#not_found'
   get '/422', :to => 'errors#unacceptable'
   get '/500', :to => 'errors#internal_error'
 
-  get '/(:slug)', to: 'pages#show', as: :landing
-  get '/(:slug)/:page', to: 'pages#show', as: :page
+  get '/:slug/:page', :to => 'pages#show', as: :page
 end

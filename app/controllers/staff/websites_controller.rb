@@ -6,7 +6,7 @@ class Staff::WebsitesController < Staff::ApplicationController
   def new; end
 
   def create
-    @website.update(website_params)
+    @website.save
 
     flash[:success] = "Website was successfully created."
     redirect_to event_staff_path(current_event)
@@ -15,7 +15,7 @@ class Staff::WebsitesController < Staff::ApplicationController
   def edit; end
 
   def update
-    @website.update(website_params)
+    @website.save
 
     flash[:success] = "Website was successfully updated."
     redirect_to event_staff_path(current_event)
@@ -29,9 +29,5 @@ class Staff::WebsitesController < Staff::ApplicationController
 
   def authorize_website
     authorize(@website)
-  end
-
-  def website_params
-    params.require(:website).permit(:domains)
   end
 end

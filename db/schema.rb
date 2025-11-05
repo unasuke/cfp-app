@@ -79,9 +79,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_111232) do
     t.bigint "website_id"
     t.text "published_body"
     t.text "unpublished_body"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.boolean "landing", default: false, null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
     t.index ["website_id"], name: "index_pages_on_website_id"
   end
 
@@ -281,7 +280,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_111232) do
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
     t.string "theme", default: "default", null: false
-    t.string "domains"
     t.index ["event_id"], name: "index_websites_on_event_id"
   end
 
