@@ -211,11 +211,6 @@ This is a major upgrade from the original CFP App that is not backwards compatib
 
 ...Coming Soon...
 
-### Website Hosting <sup>beta</sup>
-
-CFP App can now host a website for your actual conference including managing the
-static content pages and dynamic schedule program pages. See [Website
-Documentation](/docs/website_documentation.md) for more details.
 
 
 ## Customizing and Contributing

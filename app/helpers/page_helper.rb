@@ -1,7 +1,6 @@
 module PageHelper
   TAGS = {
-    "<sponsors-banner-adds></sponsors-banner-adds>" => "sponsors/banner_ads", #DEPRECATED spelling mistake
-    "<sponsors-banner-ads></sponsors-banner-ads>" => "sponsors/banner_ads",
+    "<sponsors-banner-adds></sponsors-banner-adds>" => "sponsors/banner_ads",
     "<sponsors-footer></sponsors-footer>" => "sponsors/sponsors_footer"
   }
 

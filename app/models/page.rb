@@ -26,7 +26,7 @@ class Page < ApplicationRecord
   def self.promote(page)
     transaction do
       page.website.pages.update(landing: false)
-      page.update(landing: !page.landing)
+      page.update(landing: true)
     end
   end
 
