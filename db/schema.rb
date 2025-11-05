@@ -264,13 +264,5 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_111232) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
-  create_table "websites", force: :cascade do |t|
-    t.bigint "event_id"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["event_id"], name: "index_websites_on_event_id"
-  end
-
   add_foreign_key "session_formats", "events"
-  add_foreign_key "websites", "events"
 end

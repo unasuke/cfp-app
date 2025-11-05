@@ -79,12 +79,6 @@ module ActivateNavigation
     }
   end
 
-  def website_subnav_item_map
-    @website_subnav_item_map ||= {
-      'event-website-configuration-link' => starts_with_path(:event_staff_website, current_event),
-    }
-  end
-
   def selection_subnav_item_map
     @selection_subnav_item_map ||= {
         'event-program-proposals-selection-link' => [
