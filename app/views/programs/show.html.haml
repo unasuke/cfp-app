@@ -1,6 +1,4 @@
-
-.program-page-wrapper{ data: { 'controller': 'sub-nav fly-out', 'sub-nav-displayed-id-value': "#{current_website.default_session_slug}", 'fly-out-revealed-element-value': 'inital' } }
-  = render 'fly_out', collection: @program_sessions
+.program-page-wrapper{ data: { 'controller': 'sub-nav', 'sub-nav-displayed-id-value': "#{current_website.default_session_slug}" } }
   %h3.page-title
     Program
   .program-filter-pane
@@ -8,9 +6,9 @@
     = image_tag 'themes/default/closed-filter.png', class: 'close-filter-icon hidden '
   %nav.sub-nav
     %ul
-      - current_website.displayed_session_formats.in_order.each.with_index do |session_format_config, index|
+      - current_website.displayed_session_formats.in_order.each do |session_format_config|
         %li
-          %a{ href: "#", class: "#{index == 0 ? 'selected' : ''}", data: { action: 'click->sub-nav#updateDisplay', displayedId: session_format_config.slug } }
+          %a{ href: "#", data: { action: 'click->sub-nav#updateDisplay', displayedId: "#{session_format_config.slug}"} }
             = "#{session_format_config.name} (#{@program_sessions.in_session_format(session_format_config.session_format).count})"
 
   - current_website.displayed_session_formats.each do |session_format_config|
