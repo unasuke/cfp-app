@@ -114,7 +114,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_111232) do
     t.boolean "hide_footer", default: false, null: false
     t.boolean "hide_page", default: false, null: false
     t.string "footer_category"
-    t.datetime "body_published_at", precision: nil
     t.index ["website_id"], name: "index_pages_on_website_id"
   end
 

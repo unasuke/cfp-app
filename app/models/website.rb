@@ -21,6 +21,7 @@ class Website < ApplicationRecord
   has_one_attached :background
   has_one_attached :favicon
 
+  after_touch :purge_cache, if: :caching_automatic?
   around_update :purge_cache, if: :caching_automatic?
 
   DEFAULT = 'default'.freeze
@@ -33,9 +34,11 @@ class Website < ApplicationRecord
     purge_cache { save }
   end
 
+  private
+
   def purge_cache
     self.purged_at = Time.current
-    yield
+    yield if block_given?
     FastlyService.service&.purge_by_key(event.slug)
   end
 end
