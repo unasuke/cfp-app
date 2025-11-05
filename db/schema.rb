@@ -231,6 +231,7 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_111232) do
     t.string "tier"
     t.boolean "published"
     t.string "url"
+    t.string "other_title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.text "description"

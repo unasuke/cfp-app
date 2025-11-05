@@ -2,7 +2,7 @@ class Staff::SponsorsController < Staff::ApplicationController
   before_action :enable_website_subnav
 
   def index
-    @sponsors = current_event.sponsors.order_by_tier
+    @sponsors = current_event.sponsors
   end
 
   def new
