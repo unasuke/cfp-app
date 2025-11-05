@@ -37,7 +37,6 @@ class Staff::WebsitesController < Staff::ApplicationController
       .permit(
         :logo,
         :background,
-        :favicon,
         :city,
         :location,
         :directions,
@@ -60,9 +59,6 @@ class Staff::WebsitesController < Staff::ApplicationController
         contents_attributes: [
           :id, :name, :html, :placement, :_destroy
         ],
-        meta_data_attributes: [
-          :id, :title, :author, :description, :image
-        ]
     )
   end
 end

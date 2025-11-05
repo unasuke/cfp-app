@@ -70,7 +70,6 @@ feature "Website Configuration", type: :system do
       </script>
       HTML
     )
-    fill_in("City", with: "Big Red")
     click_on("Save")
 
     visit edit_event_staff_page_path(event, home_page)

@@ -356,16 +356,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_111232) do
     t.index ["website_id"], name: "index_website_fonts_on_website_id"
   end
 
-  create_table "website_meta_data", force: :cascade do |t|
-    t.string "title"
-    t.string "author"
-    t.text "description"
-    t.bigint "website_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["website_id"], name: "index_website_meta_data_on_website_id"
-  end
-
   create_table "websites", force: :cascade do |t|
     t.bigint "event_id"
     t.datetime "created_at", null: false
@@ -393,6 +383,5 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_111232) do
   add_foreign_key "session_format_configs", "websites"
   add_foreign_key "session_formats", "events"
   add_foreign_key "sponsors", "events"
-  add_foreign_key "website_meta_data", "websites"
   add_foreign_key "websites", "events"
 end

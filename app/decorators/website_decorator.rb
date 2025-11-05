@@ -1,6 +1,5 @@
 class WebsiteDecorator < ApplicationDecorator
   delegate_all
-  delegate :title, :author, :description, to: :meta_data
 
   DEFAULT_LINKS = {
     'Schedule' => 'schedule',
@@ -146,22 +145,5 @@ class WebsiteDecorator < ApplicationDecorator
 
   def footer_content
     h.safe_join(object.contents.for(Website::Content::FOOTER).pluck(:html))
-  end
-
-  def meta_data
-    @meta_data ||= object.meta_data || object.build_meta_data
-  end
-
-  def meta_image_url
-    attachment = meta_data.image.attached? ? meta_data.image : logo
-    h.polymorphic_url(attachment) if attachment.attached?
-  end
-
-  def website_title(page_title)
-    [page_title, title].reject(&:blank?).join(" | ")
-  end
-
-  def favicon_url
-    h.polymorphic_url(favicon) if favicon.attached?
   end
 end
