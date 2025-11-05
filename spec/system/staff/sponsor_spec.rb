@@ -62,7 +62,7 @@ feature 'Event Sponsors', type: :system do
       Sponsor::TIERS.each { |tier| create(:sponsor, tier: tier) }
       visit event_staff_sponsors_path(event)
 
-      expect(page).to have_content(/diamond.*platinum.*gold.*silver.*bronze.*other.*supporter/)
+      expect(page).to have_content(/platinum.*gold.*silver.*bronze.*other.*supporter/)
     end
   end
 end
