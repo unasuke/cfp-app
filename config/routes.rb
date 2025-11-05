@@ -126,7 +126,6 @@ Rails.application.routes.draw do
     end
   end
 
-  resources :image_uploads, only: :create
   resource :public_comments, only: [:create], controller: :comments, type: 'PublicComment'
   resource :internal_comments, only: [:create], controller: :comments, type: 'InternalComment'
 

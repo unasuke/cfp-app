@@ -2,7 +2,6 @@
   display: flex;
   flex-direction: column;
   align-items: center;
-  width: 100%;
 }
 
 .preview-flex {
@@ -25,10 +24,5 @@
       border: 0;
       display: block;
     }
-  }
-  iframe {
-    border: 0;
-    width: 100%;
-    height: 100vh;
   }
 }
