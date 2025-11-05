@@ -2,14 +2,12 @@ class SessionFormat < ApplicationRecord
   belongs_to :event
   has_many :proposals
 
-  has_one :session_format_config
-
   validates_presence_of :event
   validates :description, length: { maximum: 250 }
   validates :name, uniqueness: {scope: :event}, presence: true
 
   scope :sort_by_name, ->{ order(:name) }
-  scope :publicly_viewable, ->{ where(public: true) }
+  scope :publicly_viewable, ->{ where(public: true)}
 end
 
 # == Schema Information

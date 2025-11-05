@@ -2,10 +2,6 @@ class Website < ApplicationRecord
   belongs_to :event
   has_many :pages, dependent: :destroy
 
-  has_many :session_formats, through: :event
-  has_many :session_format_configs
-  accepts_nested_attributes_for :session_format_configs
-
   has_one_attached :logo
   has_one_attached :background
 
