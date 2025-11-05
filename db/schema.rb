@@ -217,10 +217,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_111232) do
     t.string "other_title"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.text "description"
-    t.string "offer_headline"
-    t.text "offer_text"
-    t.string "offer_url"
     t.index ["event_id"], name: "index_sponsors_on_event_id"
   end
 
