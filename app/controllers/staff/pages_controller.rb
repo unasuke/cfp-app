@@ -55,23 +55,8 @@ class Staff::PagesController < Staff::ApplicationController
     @page = if params[:id] && (params[:id] != Page::BLANK_SLUG)
               current_website.pages.find_by(slug: params[:id])
             else
-              build_page
+              current_website.pages.build
             end
-  end
-
-  def build_page
-    if template = params[:page] && page_params[:template].presence
-      Page.from_template(
-        template,
-        unpublished_body: render_to_string(
-          "staff/pages/themes/#{current_website.theme}/splash",
-          layout: false
-        ),
-        website: current_website
-      )
-    else
-      current_website.pages.build
-    end
   end
 
   def authorize_page
@@ -79,15 +64,6 @@ class Staff::PagesController < Staff::ApplicationController
   end
 
   def page_params
-    params
-      .require(:page)
-      .permit(
-        :template,
-        :name,
-        :slug,
-        :hide_header,
-        :hide_footer,
-        :unpublished_body
-      )
+    params.require(:page).permit(:name, :slug, :unpublished_body)
   end
 end

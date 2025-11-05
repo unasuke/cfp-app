@@ -2,9 +2,6 @@ class Website < ApplicationRecord
   belongs_to :event
   has_many :pages
 
-  has_one_attached :logo
-  has_one_attached :background
-
   DEFAULT = 'default'.freeze
 
   def self.domain_match(domain)

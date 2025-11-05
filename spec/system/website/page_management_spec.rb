@@ -3,7 +3,7 @@ require 'rails_helper'
 feature "Website Page Management", type: :system do
   let(:event) { create(:event) }
   let(:organizer) { create(:organizer, event: event) }
-  let!(:website) { create(:website, :with_details, event: event) }
+  let!(:website) { create(:website, event: event) }
 
   scenario "Organizer creates and edits a website page", :js do
     skip "FactoryBot 😤"
@@ -82,22 +82,5 @@ feature "Website Page Management", type: :system do
 
     expect(page).to have_content('Home Page was successfully promoted.')
     expect(home_page.reload).to be_landing
-  end
-
-  scenario "Organizer creates and publishes a splash page from a template", :js do
-    skip "FactoryBot 😤"
-    login_as(organizer)
-    visit new_event_staff_page_path(event)
-    select("splash", from: "template")
-
-    click_on('Save')
-
-    accept_confirm { click_on('Publish') }
-    click_on('View')
-
-    expect(page).to have_content(event.name)
-    expect(page).to have_content(website.city)
-    expect(page).not_to have_css('header')
-    expect(page).not_to have_css('footer')
   end
 end
