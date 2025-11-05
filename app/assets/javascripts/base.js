@@ -6,12 +6,8 @@ $(document).ready(function() {
     $(".alert").not('.alert-confirm, .scheduling-error').alert('close');
   }, 5000);
 
-  $(".selectize-sortable").selectize({
-    plugins: ["drag_drop"],
-  });
-
-  $(".selectize-create").selectize({
-    plugins: ["drag_drop"],
+  $(".selectize-tags").selectize({
+    delimiter: ",",
     persist: false,
     create: function (input) {
       return {

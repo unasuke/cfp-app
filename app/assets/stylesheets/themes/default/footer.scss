@@ -1,8 +1,8 @@
 footer {
   color: white;
   .overlay {
-    background-color: black;
-    opacity: 0.9;
+    background-color: black !important;
+    opacity: 0.9 !important;
     padding: 20px 30px 35px;
   }
   .footer-header {

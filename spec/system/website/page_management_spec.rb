@@ -59,10 +59,13 @@ feature "Website Page Management", type: :system do
 
     expect(page).to have_content('Home Page was successfully published.')
 
-    click_on('Configuration')
-    fill_in('Navigation links', with: "Home\n")
-    click_on('Save')
+    visit page_path(slug: event.slug, page: home_page.slug)
+    expect(page).to have_content('Home Content')
+    within('#main-nav') { expect(page).to have_content(home_page.name) }
+  end
 
+  scenario "Public views a published website page" do
+    home_page = create(:page, published_body: 'Home Content')
     visit page_path(slug: event.slug, page: home_page.slug)
     expect(page).to have_content('Home Content')
     within('#main-nav') { expect(page).to have_content(home_page.name) }
@@ -101,15 +104,13 @@ feature "Website Page Management", type: :system do
   scenario "Organizer hides navigation to a page and hides a page entirely", :js do
     skip "FactoryBot 😤"
     home_page = create(:page, published_body: 'Home Content')
-    website.update(navigation_links: [home_page.slug])
     visit page_path(slug: event.slug, page: home_page.slug)
     expect(page).to have_content('Home Content')
-    within('#main-nav') { expect(page).to have_link(home_page.name) }
+    within('#main-nav') { expect(page).to have_content(home_page.name) }
 
     login_as(organizer)
-    visit edit_event_staff_website_path(event)
-    find_field('Navigation links').send_keys(:backspace)
-    fill_in('Navigation links', with: "Schedule\n")
+    visit edit_event_staff_page_path(event, home_page)
+    check("Hide navigation")
     click_on("Save")
 
     visit page_path(slug: event.slug, page: home_page.slug)
@@ -154,5 +155,8 @@ feature "Website Page Management", type: :system do
       expect(page).to have_content('Sponsor')
       expect(page).to have_content('FAQs')
     end
+
+
+
   end
 end
