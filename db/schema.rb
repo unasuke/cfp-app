@@ -279,7 +279,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_111232) do
     t.bigint "event_id"
     t.datetime "created_at", precision: 6, null: false
     t.datetime "updated_at", precision: 6, null: false
-    t.string "theme", default: "default", null: false
     t.index ["event_id"], name: "index_websites_on_event_id"
   end
 

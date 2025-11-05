@@ -1,8 +1,6 @@
 class Page < ApplicationRecord
   belongs_to :website
 
-  scope :published, -> { where.not(published_body: nil) }
-
   validates :name, :slug, presence: true
 
   def to_param
