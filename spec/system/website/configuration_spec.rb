@@ -45,7 +45,7 @@ feature "Website Configuration", type: :system do
 
     click_on(home_page.name, match: :first)
 
-    expect(current_path).to eq("/#{home_page.slug}")
+    expect(current_path).to eq('/home')
   end
 
   scenario "Organizer fails to add font file correctly", :js do
