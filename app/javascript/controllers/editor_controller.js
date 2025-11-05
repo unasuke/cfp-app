@@ -115,6 +115,7 @@ export default class extends Controller {
   }
 
   leavingPage(event) {
+    console.log(this.changedValue);
     if (this.changedValue) {
       event.returnValue = "Are you sure you want to leave with unsaved changes?";
       return event.returnValue;

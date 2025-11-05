@@ -13,7 +13,6 @@
   --nav_link_hover: white;
   --main_content_background: white;
   --sans-serif-font: 'Rubik';
-  --secondary-body-font: 'Rubik'
 }
 
 html {
@@ -44,7 +43,6 @@ header + #content {
 }
 
 p {
-  font-family: var(--secondary-body-font);
   font-size: 14px;
   line-height: 21px;
   margin-bottom: 20px;

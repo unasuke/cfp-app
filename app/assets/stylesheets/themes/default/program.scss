@@ -115,7 +115,6 @@
   }
 
   .session-abstract {
-    font-family: var(--secondary-body-font);
     height: 6.25rem;
     font-size: 16px;
     font-weight: 400;
@@ -131,7 +130,6 @@
   }
 
   .session-format-tag {
-    font-family: var(--secondary-body-font);
     padding: 8px 10px 8px 50px;
     border: 1px solid $divider-light;
     border-radius: 100px;
@@ -157,7 +155,6 @@
   }
 
   .track-tag {
-    font-family: var(--secondary-body-font);
     font-size: 12px;
     padding: 7px 10px;
     border-radius: 20px;
