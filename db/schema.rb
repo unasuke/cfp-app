@@ -336,16 +336,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_111232) do
     t.index ["item_type", "item_id"], name: "index_versions_on_item_type_and_item_id"
   end
 
-  create_table "website_contents", force: :cascade do |t|
-    t.text "html"
-    t.string "placement", default: "head", null: false
-    t.string "name"
-    t.bigint "website_id"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-    t.index ["website_id"], name: "index_website_contents_on_website_id"
-  end
-
   create_table "website_fonts", force: :cascade do |t|
     t.string "name"
     t.boolean "primary"

@@ -8,9 +8,7 @@
     :css
       #{current_website.font_faces_css}
       #{current_website.font_root_css}
-    = javascript_pack_tag "tailwind"
-    = current_website.head_content
-
+    %script{src: "https://cdn.tailwindcss.com" }
   %body
     - unless @page&.hide_header?
       = render 'layouts/themes/default/header'
@@ -39,4 +37,3 @@
         document.getElementById("main-nav").addEventListener('click', function(e) {
           toggleNav()
         })
-    = current_website.footer_content

@@ -138,12 +138,4 @@ class WebsiteDecorator < ApplicationDecorator
       }
     CSS
   end
-
-  def head_content
-    h.safe_join(object.contents.for(Website::Content::HEAD).pluck(:html))
-  end
-
-  def footer_content
-    h.safe_join(object.contents.for(Website::Content::FOOTER).pluck(:html))
-  end
 end
