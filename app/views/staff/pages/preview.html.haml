@@ -3,20 +3,14 @@
     .page-header.clearfix
       %h1 Preview #{@page.name} Page
 
-.row
-  .col-md-12
-    #live-preview-page.col-md-12
-      %iframe{
-        src: "#{event_staff_page_path(current_event, @page)}",
-        width: "100%",
-        style: "height:90vh;",
-        id: "page-preview"}
+%iframe{
+  src: "#{event_staff_page_path(current_event, @page)}",
+  width: "100%",
+  style: "height:90vh;",
+  id: "page-preview"}
 
 .row
   .col-sm-12
-    = link_to("Preview Full Page",
-      event_staff_page_path(current_event, @page),
-      class: 'btn btn-primary')
     = link_to("Publish",
       publish_event_staff_page_path(current_event, @page),
       method: :patch,

@@ -42,7 +42,7 @@ feature "Website Configuration", type: :system do
 
     expect(page).to have_content(strip_tags(home_page.published_body))
 
-    click_on(home_page.name, match: :first)
+    click_on(home_page.name)
 
     expect(current_path).to eq('/home')
   end

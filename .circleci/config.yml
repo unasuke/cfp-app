@@ -81,7 +81,3 @@ jobs:
 
       # Run the tests
       - run: bin/rake
-
-      # Store failed js spec artifacts
-      - store_artifacts:
-          path: tmp/screenshots

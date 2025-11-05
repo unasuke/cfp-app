@@ -5,10 +5,8 @@ class Page < ApplicationRecord
 
   validates :name, :slug, presence: true
 
-  BLANK_SLUG = "0"
-
   def to_param
-    slug.presence || BLANK_SLUG
+    slug
   end
 
   def self.promote(page)
