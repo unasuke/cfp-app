@@ -174,9 +174,7 @@
   }
 }
 
-.navbar-fixed-top.program-subnav,
-.navbar-fixed-top.schedule-subnav,
-.navbar-fixed-top.website-subnav {
+.navbar-fixed-top.program-subnav, .navbar-fixed-top.schedule-subnav {
   border-radius: 0;
   background-color: $dark-blue;
   border-color: $dark-blue;

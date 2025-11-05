@@ -31,7 +31,6 @@
     "sass": "^1.82.0",
     "sass-loader": "^16.0.3",
     "shakapacker": "6",
-    "stimulus": "^3.0.1",
     "style-loader": "^4.0.0",
     "terser-webpack-plugin": "^5.3.10",
     "webpack": "^5.97.0",

@@ -73,17 +73,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_111232) do
     t.index ["user_id"], name: "index_notifications_on_user_id"
   end
 
-  create_table "pages", force: :cascade do |t|
-    t.string "name"
-    t.string "slug"
-    t.bigint "website_id"
-    t.text "published_body"
-    t.text "unpublished_body"
-    t.datetime "created_at", precision: 6, null: false
-    t.datetime "updated_at", precision: 6, null: false
-    t.index ["website_id"], name: "index_pages_on_website_id"
-  end
-
   create_table "program_sessions", force: :cascade do |t|
     t.bigint "event_id"
     t.bigint "proposal_id"
@@ -282,7 +271,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_111232) do
     t.index ["event_id"], name: "index_websites_on_event_id"
   end
 
-  add_foreign_key "pages", "websites"
   add_foreign_key "session_formats", "events"
   add_foreign_key "websites", "events"
 end
