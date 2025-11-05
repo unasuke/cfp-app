@@ -19,14 +19,6 @@ class PagePolicy < ApplicationPolicy
     new?
   end
 
-  def show?
-    new?
-  end
-
-  def preview?
-    new?
-  end
-
   def publish?
     new?
   end
