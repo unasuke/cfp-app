@@ -26,7 +26,7 @@ feature 'Wesite displays an events sponsors', type: :system do
     end
 
     it 'Website pages can display a sponsors footer', js: true do
-      create(:sponsor, :with_footer_logo)
+      sponsor_footer_logo = create(:sponsor, :with_footer_logo)
       home_page = create(:page, published_body: "Home")
 
       visit sponsors_path(event)
@@ -35,7 +35,8 @@ feature 'Wesite displays an events sponsors', type: :system do
       visit page_path(event, page: home_page.slug)
       expect(page).to_not have_css("img[src*='ruby1.png']")
 
-      sponsors_footer_element = "<sponsors-footer></sponsors-footer>"
+      sponsors_footer_element = "<div data-controller='sponsors-footer'
+                                      data-sponsors-footer-event-slug-value='#{event.slug}'>"
 
       home_page.update(published_body: sponsors_footer_element)
       visit page_path(event, page: home_page.slug)
@@ -45,7 +46,8 @@ feature 'Wesite displays an events sponsors', type: :system do
 
     it "Sponsors footer displays a sponsor offer on click if sponsor has offer available", js: true do
       sponsor = create(:sponsor, :with_footer_logo, :with_offer)
-      sponsors_footer_element = "<sponsors-footer></sponsors-footer>"
+      sponsors_footer_element = "<div data-controller='sponsors-footer'
+                                      data-sponsors-footer-event-slug-value='#{event.slug}'>"
       home_page = create(:page, published_body: sponsors_footer_element)
 
       visit page_path(event, page: home_page.slug)
