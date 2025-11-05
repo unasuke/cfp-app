@@ -74,8 +74,8 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_111232) do
   end
 
   create_table "pages", force: :cascade do |t|
-    t.string "name", null: false
-    t.string "slug", null: false
+    t.string "name"
+    t.string "slug"
     t.bigint "website_id"
     t.text "published_body"
     t.text "unpublished_body"
