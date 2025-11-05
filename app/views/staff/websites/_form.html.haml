@@ -27,6 +27,7 @@
         = f.input :twitter_handle
         = f.input :facebook_url
         = f.input :instagram_url
+        = f.input :domains
     .col-md-6
       %fieldset
       %legend.fieldset-legend Configure Website Session Formats
@@ -72,8 +73,7 @@
         = ff.input :description
         = image_input(ff, :image)
 
-      %legend.fieldset-legend Domains/Caching
-      = f.input :domains
+      %legend.fieldset-legent Caching
       = f.input :caching, collection: Website.cachings, include_blank: false
   .row
     .col-sm-12
