@@ -9,7 +9,7 @@
       - if website.background.attached?
         = f.label :background, "Current Background", class: "control-label"
         %div
-          = image_tag(website.background, width: "200px")
+          = image_tag(website.background)
       = f.input :background,
         label: website.background.attached? ? "Replace Background" : "Background"
       = f.input :city

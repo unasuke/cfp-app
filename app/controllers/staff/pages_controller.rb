@@ -70,7 +70,7 @@ class Staff::PagesController < Staff::ApplicationController
       Page.from_template(
         template,
         unpublished_body: render_to_string(
-          "staff/pages/themes/#{current_website.theme}/#{template}",
+          "staff/pages/themes/#{current_website.theme}/splash",
           layout: false
         ),
         website: current_website
