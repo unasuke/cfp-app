@@ -34,8 +34,4 @@ class PagePolicy < ApplicationPolicy
   def promote?
     new?
   end
-
-  def destroy?
-    new?
-  end
 end
