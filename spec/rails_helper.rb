@@ -103,12 +103,6 @@ RSpec.configure do |config|
     end
   end
 
-  config.around(:each, caching: true) do |example|
-    Rails.configuration.action_controller.perform_caching = true
-    example.run
-    Rails.configuration.action_controller.perform_caching = false
-  end
-
   config.before type: :system do
     driven_by :rack_test
   end

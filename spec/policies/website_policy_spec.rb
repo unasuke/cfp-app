@@ -12,7 +12,7 @@ RSpec.describe WebsitePolicy do
     CurrentEventContext.new(user, event)
   end
 
-  permissions :show?, :new?, :create?, :edit?, :update?, :purge? do
+  permissions :show?, :new?, :create?, :edit?, :update? do
     it 'allows organizers for event' do
       expect(subject).to permit(pundit_user(organizer))
     end

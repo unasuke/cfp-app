@@ -383,8 +383,6 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_111232) do
     t.string "facebook_url"
     t.string "instagram_url"
     t.string "navigation_links", default: [], array: true
-    t.string "caching", default: "off", null: false
-    t.datetime "purged_at", precision: nil
     t.index ["event_id"], name: "index_websites_on_event_id"
   end
 

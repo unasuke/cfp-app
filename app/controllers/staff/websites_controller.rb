@@ -27,13 +27,6 @@ class Staff::WebsitesController < Staff::ApplicationController
     end
   end
 
-  def purge
-    @website.manual_purge
-
-    flash[:success] = "Website was successfully purged."
-    redirect_to edit_event_staff_website_path(current_event)
-  end
-
   private
 
   def set_website
@@ -62,7 +55,6 @@ class Staff::WebsitesController < Staff::ApplicationController
         :facebook_url,
         :instagram_url,
         :head_content,
-        :caching,
         footer_categories: [],
         navigation_links: [],
         session_format_configs_attributes: [

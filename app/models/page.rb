@@ -4,7 +4,7 @@ class Page < ApplicationRecord
     'home' => { },
   }
 
-  belongs_to :website, touch: :purged_at
+  belongs_to :website
 
   scope :published, -> { where.not(published_body: nil).where(hide_page: false) }
   scope :in_footer, -> { published.where.not(footer_category: [nil, ""]) }
