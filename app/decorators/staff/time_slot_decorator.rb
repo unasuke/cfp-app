@@ -123,10 +123,6 @@ class Staff::TimeSlotDecorator < Draper::Decorator
     object.session_presenter || object.presenter
   end
 
-  def presenters_with_bios
-    object.program_session.speakers.pluck(:speaker_name, :bio)
-  end
-
   def display_track_name
     object.session_track_name || object.track_name
   end
@@ -139,24 +135,12 @@ class Staff::TimeSlotDecorator < Draper::Decorator
     object.room_name
   end
 
-  def sponsored?
-    object.sponsor.present?
-  end
-
   def preview_css
     'preview' unless object.persisted?
   end
 
   def filled_with_session?
     object.program_session.present?
-  end
-
-  def session_format
-    object.program_session.session_format
-  end
-
-  def track
-    object.program_session.track
   end
 
   def configured?

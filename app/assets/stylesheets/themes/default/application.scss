@@ -1,5 +1,4 @@
 @import 'colors';
-@import 'shared';
 @import 'nav';
 @import 'footer';
 @import 'program';
@@ -36,7 +35,6 @@ body {
 header + #content {
   background-color: var(--main_content_background);
   margin-top: 110px;
-  min-height: 95vh;
 }
 
 p {

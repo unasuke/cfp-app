@@ -3,7 +3,8 @@ class TimeSlot < ApplicationRecord
   belongs_to :room
   belongs_to :track, optional: true
   belongs_to :event
-  belongs_to :sponsor, optional: true
+
+  attr_reader :session_duration
 
   DEFAULT_TIME = Time.current.beginning_of_day.change(hour: 9)
   DEFAULT_DURATION = 60 # minutes

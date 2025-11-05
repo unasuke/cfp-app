@@ -280,12 +280,10 @@ ActiveRecord::Schema[7.0].define(version: 2025_02_15_111232) do
     t.datetime "created_at", precision: nil
     t.datetime "updated_at", precision: nil
     t.bigint "track_id"
-    t.bigint "sponsor_id"
     t.index ["conference_day"], name: "index_time_slots_on_conference_day"
     t.index ["event_id"], name: "index_time_slots_on_event_id"
     t.index ["program_session_id"], name: "index_time_slots_on_program_session_id"
     t.index ["room_id"], name: "index_time_slots_on_room_id"
-    t.index ["sponsor_id"], name: "index_time_slots_on_sponsor_id"
     t.index ["track_id"], name: "index_time_slots_on_track_id"
   end
 

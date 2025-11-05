@@ -2,8 +2,6 @@ class Sponsor < ApplicationRecord
   belongs_to :event
   has_one :website, through: :event, touch: :purged_at
 
-  has_many :time_slots
-
   has_one_attached :primary_logo
   has_one_attached :footer_logo
   has_one_attached :banner_ad
@@ -25,9 +23,7 @@ class Sponsor < ApplicationRecord
   }
 
   def has_offer?
-    (offer_headline.present? &&
-     offer_text.present? &&
-     offer_url.present? )
+    offer_headline && offer_text && offer_url
   end
 end
 
