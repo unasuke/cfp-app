@@ -2,7 +2,6 @@ Rails.application.routes.draw do
   unless ENV['DISABLE_WEBSITE']
     constraints DomainConstraint.new do
       get '/', to: 'pages#show'
-      get '/(:slug)/program', to: 'programs#show'
       get '/(:slug)/schedule', to: 'schedule#show'
       get '/:domain_page_or_slug', to: 'pages#show'
       get '/:slug/:page', to: 'pages#show'
@@ -158,7 +157,6 @@ Rails.application.routes.draw do
   get '/500', :to => 'errors#internal_error'
 
   get '/(:slug)', to: 'pages#show', as: :landing
-  get '/(:slug)/program', to: 'programs#show', as: :program
   get '/(:slug)/schedule', to: 'schedule#show', as: :schedule
   get '/(:slug)/:page', to: 'pages#show', as: :page
 end
