@@ -3,8 +3,6 @@ class Website::Font < ApplicationRecord
 
   has_one_attached :file
 
-  validates :file, :name, presence: true
-
   scope :primary, -> { where(primary: true) }
   scope :secondary, -> { where(secondary: true) }
 end
